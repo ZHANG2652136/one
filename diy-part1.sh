@@ -22,5 +22,5 @@ echo 'src-git openclash https://github.com/vernesong/OpenClash' >>feeds.conf.def
 #echo 'src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2;main' >>feeds.conf.default
 #echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall.git;main' >>feeds.conf.default
 #echo 'src-git clash https://github.com/lxiaya/onecloud-package' >>feeds.conf.default
-echo 'src-git mosdns https://github.com/sbwml/luci-app-mosdns' >>feeds.conf.default
+#echo 'src-git mosdns https://github.com/sbwml/luci-app-mosdns' >>feeds.conf.default
 #echo 'src-git helloworld https://github.com/lxiaya/helloworld' >>feeds.conf.default
