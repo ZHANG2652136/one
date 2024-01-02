@@ -67,21 +67,30 @@ jobs:
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         
-    - name: 加载自定义脚本
+    - name: 加载自定义
       run: |
+        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
         chmod +x $DIY_P1_SH
         cd openwrt
-        $GITHUB_WORKSPACE/$DIY_P1_SH        
+        $GITHUB_WORKSPACE/$DIY_P1_SH    
         
-      
-    - name: 下载oc内核
-      run: |
-        $GITHUB_WORKSPACE/$DIY_P2_SH
-        
+    - name: 更新订阅源
+      run: cd openwrt && ./scripts/feeds update -a
+
+    - name: 安装订阅源
+      run: cd openwrt && ./scripts/feeds install -a
+
     - name: 加载自定义配置
       run: |
         [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+        chmod +x $DIY_P2_SH
+        cd openwrt
+        $GITHUB_WORKSPACE/$DIY_P2_SH
+        
+    - name: 二次安装订阅源
+      run: cd openwrt && ./scripts/feeds install -a
+
         
     - name: 下载编译依赖
       id: package
